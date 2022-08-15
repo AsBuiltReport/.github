@@ -64,3 +64,7 @@ Click each vendor logo to view available report modules and associated documenta
         <td align="center" valign="middle" width="50%"><a href="https://github.com/orgs/AsBuiltReport/repositories?q=Rubrik&type=all&language=&sort="><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/Rubrik.png" /></a></td>
     </tr>
 </table>
+
+<h3 style="font-size:2vw" align="left"><b>Additional Information</b></h3>
+
+Please refer to the [AsBuiltReport website](https://www.asbuiltreport.com) for additional information and resources related to this project.
