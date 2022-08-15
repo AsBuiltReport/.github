@@ -3,20 +3,20 @@
             <img src='https://raw.githubusercontent.com/AsBuiltReport/AsBuiltReport/master/AsBuiltReport.png' width="15%" height="15%" /></a>
 </p>
 
-<h1 style="font-size:5vw" align="center"><b>As Built Report</b></h1>
-<p align="center">
-    <a href="https://twitter.com/AsBuiltReport" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/twitter/follow/AsBuiltReport.svg?style=social" alt="Twitter" /></a>
-</p>
+<h1 style="font-size:5vw" align="center">
+    As Built Report
+    <br><br>Document Your Datacenter
+    <br>With PowerShell
+</h1>
 
 <p align="center">
+    <a href="https://twitter.com/AsBuiltReport" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/twitter/follow/AsBuiltReport.svg?style=social" alt="Twitter" /></a>
     <a href="https://code.vmware.com/join" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/VMware{code}-AsBuiltReport-green.svg?logo=slack" alt="VMware {code} Slack" /></a>
 </p>
 
 <p align="center">
     <a href='https://ko-fi.com/B0B7DDGZ7' target="_blank" rel="noopener noreferrer"><img height='36' style='border:0px;height:36px;' src='https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/kofi_button_blue.png' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 </p>
-
-<h2 style="font-size:3vw" align="center"><b>Document Your Datacenter With PowerShell</b></h2>
 
 As Built Report is an open source configuration document framework which utilises Microsoft PowerShell to produce as-built documentation in multiple document formats for multiple vendors and technologies. The framework allows users to easily generate clear and consistent documentation, for any environment which supports Microsoft PowerShell and/or a RESTful API.
 
