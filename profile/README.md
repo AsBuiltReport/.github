@@ -11,7 +11,6 @@
 
 <p align="center">
     <a href="https://twitter.com/AsBuiltReport" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/twitter/follow/AsBuiltReport.svg?style=social" alt="Twitter" /></a>
-    <a href="https://code.vmware.com/join" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/VMware{code}-AsBuiltReport-green.svg?logo=slack" alt="VMware {code} Slack" /></a>
 </p>
 
 <p align="center">
