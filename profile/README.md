@@ -24,10 +24,10 @@ As Built Report is an open source configuration document framework which utilise
 
 ||||
 |-----------------------|-----------------------|-----------------------|
-| :memo: **Multiple Document Formats** | :microscope: **Granular Detail Level** | :art: **Customised Styling** |
-| Generate reports in one or more document formats, including DOCX, HTML, and Text. | Configure the detail level for each section of a report. You have the choice of producing a summarised report, a fully comprehensive report or something in between. | Use a default style or create your own to match your corporate identity. Set page orientation, text and table formatting with fonts, colours, borders and highlighted cells and rows. |
-| :package: **Modular Design** | :hearts: **Health Checks** | :email: **Email Reports** |
-| Modular design enables contributors a simple way to develop new reports. | Enable health checks to highlight configuration issues within a report. Toggle individual health checks on or off as required. | Attach and send reports via email to one or more recipients. |
+| :memo: **Multiple Document Formats** | :microscope: **Granular Information Level** | :art: **Customised Styling** |
+| Generate reports in one or more document formats, including DOCX, HTML, and Text. | Configure the information level for each report section. You can create a summary report, a fully comprehensive report, or something in between. | Use the default style or create your own to match your corporate identity. Set page orientation, text and table formatting with fonts, colours, borders and highlighted cells and rows. |
+| :package: **Modular Architecture** | :hearts: **Health Checks** | :email: **Email Reports** |
+| The modular architecture and core framework enables users to use the same in-built commands to generate as-built configuration reports from a library of technology vendors. | Enable health checks to highlight configuration issues within a report. Toggle individual health checks on or off as required. | Attach and send reports via email to one or more recipients. |
 
 <h3 style="font-size:2vw" align="left"><b>Components</b></h3>
 
@@ -35,11 +35,12 @@ As Built Report is an open source configuration document framework which utilise
 
 |||
 |-----------------------|-----------------------|
-| **As Built Report Configuration** | **Reports Configuration** |
-| A JSON configuration file used to store information relating to author’s name, company information & SMTP mail server configuration. Individual configuration files can be saved and specified also. | The report configuration is a JSON file which stores information specific to the related report. It holds information such as the report name, version, and release status. The report configuration can also provide functionality such as configurable report options, health checks and granular information levels. |
-| **Reports Module** | **Styles Script (.ps1)** |
-| The report module is specific to each vendor and/or technology and is used to extract information from the specific environment. The report module will be written to utilise PowerShell modules or RESTful APIs which the vendor/technology provides. | The styles script sets the default layout, fonts, colours and sizes used within the report. Style scripts can be used to layout cover pages, table of contents and other unique tables or sections. |
-
+| 📦 **Core Module** | 📦 **Reports Module** |
+| The core module provides the framework for each individual report module. It provides the base commands and default style script used to generate each individual report. | The report module is specific to each vendor and/or technology and is used to extract information from the specific environment.<br><br>The report module will be written to utilise PowerShell modules or RESTful APIs which the vendor/technology provides. |
+| ⚙️ **Core Module Configuration** | ⚙️ **Reports Module Configuration** |
+|The core module configuration is a JSON file which stores information relating to the author’s name, company information & SMTP mail server configuration.<br><br>Individual core module configuration files can be saved and specified when generating reports. | The reports module configuration is a JSON file which stores information specific to the related report. It holds information such as the report name, version, and release status.<br><br>The report configuration can also provide functionality such as configurable report options, health checks and granular information levels.<br><br>Individual report module configuration files can be saved and specified when generating reports. |
+| 🖌️ **Styles Script (.ps1)** |
+| The styles script sets the default layout, fonts, colours and sizes used within the report.<br><br>Style scripts can be used to layout cover pages, table of contents and other unique tables or sections.<br><br>Custom style scripts can be created to format reports to match your corporate identity. |
 
 <h3 style="font-size:2vw" align="left"><b>Report Modules</b></h3>
 
