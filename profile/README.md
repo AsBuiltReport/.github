@@ -39,7 +39,7 @@ As Built Report is an open source configuration document framework which utilise
 | The core module provides the framework for each individual report module. It provides the base commands and default style script used to generate each individual report. | The report module is specific to each vendor and/or technology and is used to extract information from the specific environment.<br><br>The report module will be written to utilise PowerShell modules or RESTful APIs which the vendor/technology provides. |
 | ⚙️ **Core Module Configuration** | ⚙️ **Reports Module Configuration** |
 |The core module configuration is a JSON file which stores information relating to the author’s name, company information & SMTP mail server configuration.<br><br>Individual core module configuration files can be saved and specified when generating reports. | The reports module configuration is a JSON file which stores information specific to the related report. It holds information such as the report name, version, and release status.<br><br>The report configuration can also provide functionality such as configurable report options, health checks and granular information levels.<br><br>Individual report module configuration files can be saved and specified when generating reports. |
-| 🖌️ **Styles Script (.ps1)** |
+| 🖌️ **Styles Script** |
 | The styles script sets the default layout, fonts, colours and sizes used within the report.<br><br>Style scripts can be used to layout cover pages, table of contents and other unique tables or sections.<br><br>Custom style scripts can be created to format reports to match your corporate identity. |
 
 <h3 style="font-size:2vw" align="left"><b>Report Modules</b></h3>
