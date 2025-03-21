@@ -26,7 +26,7 @@ As Built Report is an open source configuration document framework which utilise
 >
 >Your contributions, whether through code, bug reports, or documentation, are crucial to its success!
 >
->Use the [discussion board](https://github.com/AsBuiltReport/.github/discussions) to share ideas, ask for help, or collaborate with others. Together, we can keep improving AsBuiltReport for everyone!
+>Use the [discussion board](https://github.com/orgs/AsBuiltReport/discussions) to share ideas, ask for help, or collaborate with others. Together, we can keep improving AsBuiltReport for everyone!
 
 <h3 style="font-size:2vw" align="left"><b>Features</b></h3>
 
