@@ -19,6 +19,14 @@
 
 As Built Report is an open source configuration document framework which utilises Microsoft PowerShell to produce as-built documentation in multiple document formats for multiple vendors and technologies. The framework allows users to easily generate clear and consistent documentation, for any environment which supports Microsoft PowerShell and/or a RESTful API.
 
+>[!NOTE]
+>Due to time constraints and limited access to development environments and resources for current contributors, development and support for AsBuiltReport has slowed, with some report modules now falling behind on support for current vendor technology versions.
+>
+>However, this is an open source project, and we encourage users to [contribute](https://www.asbuiltreport.com/dev-guide/contributing/) to help keep it going.
+>
+>Your contributions, whether through code, bug reports, or documentation, are crucial to its success!
+>
+>Use the [discussion board](https://github.com/AsBuiltReport/.github/discussions) to share ideas, ask for help, or collaborate with others. Together, we can keep improving AsBuiltReport for everyone!
 
 <h3 style="font-size:2vw" align="left"><b>Features</b></h3>
 
