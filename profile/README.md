@@ -32,10 +32,12 @@ AsBuiltReport is an open source configuration document framework which utilises 
 
 ||||
 |-----------------------|-----------------------|-----------------------|
-| :memo: **Multiple Document Formats** | :microscope: **Granular Information Level** | :art: **Customised Styling** |
-| Generate reports in one or more document formats, including DOCX, HTML, and Text. | Configure the information level for each report section. You can create a summary report, a fully comprehensive report, or something in between. | Use the default style or create your own to match your corporate identity. Set page orientation, text and table formatting with fonts, colours, borders and highlighted cells and rows. |
-| :package: **Modular Architecture** | :hearts: **Health Checks** | :email: **Email Reports** |
-| The modular architecture and core framework enables users to use the same in-built commands to generate as-built configuration reports from a library of technology vendors. | Enable health checks to highlight configuration issues within a report. Toggle individual health checks on or off as required. | Attach and send reports via email to one or more recipients. |
+| :memo: **Multiple Document Formats** | :world_map: **Multilingual Support - Coming Soon!** | :microscope: **Granular Information Level** |
+| Generate reports in one or more document formats, including DOCX, HTML, and Text. | Comprehensive multilingual support allows reports to be generated in multiple languages, where available. | Configure the information level for each report section. You can create a summary report, a fully comprehensive report, or something in between. |
+| :art: **Customised Styling** | :package: **Modular Architecture** | :hearts: **Health Checks** | 
+| Use the default style or create your own to match your corporate identity. Set page orientation, text and table formatting with fonts, colours, borders and highlighted cells and rows. | The modular architecture and core framework enables users to use the same in-built commands to generate as-built configuration reports from a library of technology vendors. | Enable health checks to highlight configuration issues within a report. Toggle individual health checks on or off as required. |
+| :email: **Email Reports** | | |
+| Attach and send reports via email to one or more recipients. | | |
 
 <h3 style="font-size:2vw" align="left"><b>Components</b></h3>
 
