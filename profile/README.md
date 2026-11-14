@@ -19,7 +19,7 @@
 >
 >Use the [discussion board](https://github.com/orgs/AsBuiltReport/discussions) to share ideas, ask for help, or collaborate with others. Together, we can keep improving AsBuiltReport for everyone!
 
-<h3 style="font-size:2vw" align="left"><b>Features</b></h3>
+## Features
 
 |||
 |-----------------------|-----------------------|
@@ -32,16 +32,16 @@
 | :email: **Email Reports** | | |
 | Attach and send reports via email to one or more recipients. | | |
 
-<h3 style="font-size:2vw" align="left"><b>Use Cases</b></h3>
+## Use Cases
 
 |||
 |-----------------------|-----------------------|
-| :heavy_check_mark: **Compliance Audits** | :arrows_clockwise: **Change Management**
+| :heavy_check_mark: **Compliance Audits** | :arrows_clockwise: **Change Management** |
 | Generate point-in-time infrastructure documentation for ISO 27001, SOC 2, PCI-DSS, and other compliance frameworks. | Produce before-and-after documentation for change advisory board (CAB) submissions and post-change verification. |
 | :handshake: **Environment Handover** | :shield: **Disaster Recovery** | 
 | Accelerate onboarding and handover with comprehensive, consistent infrastructure documentation generated on demand. | Maintain accurate as-built records of your infrastructure to support disaster recovery planning and runbook validation. |
 
-<h3 style="font-size:2vw" align="left"><b>Components</b></h3>
+## Components
 
 |||
 | :-----------------------| :-----------------------|
@@ -52,30 +52,34 @@
 | 🖌️ **Styles Script** |
 | The styles script sets the default layout, fonts, colours and sizes used within the report.<br><br>Style scripts can be used to layout cover pages, table of contents and other unique tables or sections.<br><br>Custom style scripts can be created to format reports to match your corporate identity. |
 
-<h3 style="font-size:2vw" align="left"><b>Report Modules</b></h3>
+## Report Modules
 
-Click each vendor logo to view available report modules and associated documentation.
+Select a module to open its repository and documentation.
 
-<table width="100%">
-    <tr>
-        <td align="center" valign="middle" width="50%"><a href="https://github.com/orgs/AsBuiltReport/repositories?q=VMware&type=all&language=&sort="><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/VMware.png" width="75%" height="75%" /></a></td>
-        <td align="center" valign="middle" width="50%"><a href="https://github.com/orgs/AsBuiltReport/repositories?q=Microsoft&type=all&language=&sort="><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/Microsoft.png" width="75%" height="75%" /></a></td>
-    </tr>
-    <tr>
-        <td align="center" valign="middle" width="50%"><a href="https://github.com/orgs/AsBuiltReport/repositories?q=DellEMC&type=all&language=&sort="><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/Dell_EMC.png" width="75%" height="75%" /></a></td>
-        <td align="center" valign="middle" width="50%"><a href="https://github.com/orgs/AsBuiltReport/repositories?q=NetApp&type=all&language=&sort="><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/NetApp.png" /></a></td>
-    </tr>
-    <tr>
-        <td align="center" valign="middle" width="50%"><a href="https://github.com/orgs/AsBuiltReport/repositories?q=Nutanix&type=all&language=&sort="><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/Nutanix.png" /></a></td>
-        <td align="center" valign="middle" width="50%"><a href="https://github.com/orgs/AsBuiltReport/repositories?q=PureStorage&type=all&language=&sort="><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/PureStorage.jpg" /></a></td>
-    </tr>
-    <tr>
-        <td align="center" valign="middle" width="50%"><a href="https://github.com/orgs/AsBuiltReport/repositories?q=Veeam&type=all&language=&sort="><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/Veeam.png" width="50%" height="50%" /></a></td>
-        <td align="center" valign="middle" width="50%"><a href="https://github.com/orgs/AsBuiltReport/repositories?q=Rubrik&type=all&language=&sort="><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/Rubrik.png" /></a></td>
-    </tr>
-</table>
+<p align="center">
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.Core"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Core.png" alt="AsBuiltReport.Core" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.Aruba.ClearPass"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Aruba.ClearPass.png" alt="AsBuiltReport.Aruba.ClearPass" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.DellEMC.VxRail"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.DellEMC.VxRail.png" alt="AsBuiltReport.DellEMC.VxRail" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.Fortinet.FortiGate"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Fortinet.FortiGate.png" alt="AsBuiltReport.Fortinet.FortiGate" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.Microsoft.AD"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Microsoft.AD.png" alt="AsBuiltReport.Microsoft.AD" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.Microsoft.Azure"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Microsoft.Azure.png" alt="AsBuiltReport.Microsoft.Azure" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.Microsoft.DHCP"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Microsoft.DHCP.png" alt="AsBuiltReport.Microsoft.DHCP" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.Microsoft.SCVMM"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Microsoft.SCVMM.png" alt="AsBuiltReport.Microsoft.SCVMM" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.Microsoft.Windows"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Microsoft.Windows.png" alt="AsBuiltReport.Microsoft.Windows" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.NetApp.ONTAP"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.NetApp.ONTAP.png" alt="AsBuiltReport.NetApp.ONTAP" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.Nutanix.PrismElement"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Nutanix.PrismElement.png" alt="AsBuiltReport.Nutanix.PrismElement" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.PureStorage.FlashArray"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.PureStorage.FlashArray.png" alt="AsBuiltReport.PureStorage.FlashArray" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.Rubrik.CDM"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Rubrik.CDM.png" alt="AsBuiltReport.Rubrik.CDM" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.VMware.AppVolumes"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.VMware.AppVolumes.png" alt="AsBuiltReport.VMware.AppVolumes" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.VMware.ESXi"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.VMware.ESXi.png" alt="AsBuiltReport.VMware.ESXi" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.VMware.Horizon"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.VMware.Horizon.png" alt="AsBuiltReport.VMware.Horizon" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.VMware.SRM"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.VMware.SRM.png" alt="AsBuiltReport.VMware.SRM" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.VMware.vSphere"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.VMware.vSphere.png" alt="AsBuiltReport.VMware.vSphere" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.Veeam.VB365"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Veeam.VB365.png" alt="AsBuiltReport.Veeam.VB365" width="270"></a>
+    <a href="https://github.com/AsBuiltReport/AsBuiltReport.Veeam.VBR"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Veeam.VBR.png" alt="AsBuiltReport.Veeam.VBR" width="270"></a>
+</p>
 
-<h3 style="font-size:2vw" align="left"><b>Get Started</b></h3>
+## Get Started
 
 | :rocket: **New to AsBuiltReport?** | :electric_plug: **Looking for a specific module?** |
 | :-----------------------| :-----------------------|
