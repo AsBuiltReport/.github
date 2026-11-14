@@ -1,0 +1,15 @@
+{
+    "name": "asbuiltreport-repo-banners",
+    "private": true,
+    "description": "Renders the README banners and organisation profile tiles for AsBuiltReport repos",
+    "type": "module",
+    "scripts": {
+        "render": "node render.mjs"
+    },
+    "engines": {
+        "node": ">=22"
+    },
+    "dependencies": {
+        "playwright": "1.64.1"
+    }
+}

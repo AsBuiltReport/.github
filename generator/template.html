@@ -1,0 +1,160 @@
+<!doctype html>
+<!--
+    Banner and tile template for the AsBuiltReport repo banners.
+    render.mjs opens this file with query string parameters and takes a screenshot.
+    Parameters:
+        kind   banner (880x240, rendered at 2x) or tile (420x120, rendered at 2x)
+        name   repo name without the "AsBuiltReport." prefix, for example Microsoft.Azure
+        footer third banner line: "PS> Install-Module ..." or a URL
+    Open it in a browser to preview, for example:
+        template.html?kind=banner&name=Microsoft.Azure&footer=PS>%20Install-Module%20AsBuiltReport.Microsoft.Azure
+-->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>AsBuiltReport banner</title>
+<style>
+    @font-face {
+        font-family: "Archivo";
+        font-style: normal;
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        src: url("fonts/archivo-latin-wdth-normal.woff2") format("woff2");
+    }
+    @font-face {
+        font-family: "Cascadia Code";
+        font-style: normal;
+        font-weight: 200 700;
+        src: url("fonts/cascadia-code-latin-wght-normal.woff2") format("woff2");
+    }
+
+    :root {
+        --console-blue: #012456;
+        --highlighter: #FFD02B;
+        --tint: #9DB7E8;
+        --icon-tile: #0B3470;
+        --white: #FFFFFF;
+    }
+
+    html, body { margin: 0; padding: 0; background: transparent; }
+
+    .card {
+        position: relative;
+        overflow: hidden;
+        background: var(--console-blue);
+        color: var(--white);
+        box-sizing: border-box;
+    }
+
+    .fit { white-space: nowrap; overflow: hidden; }
+
+    /* ---------- Banner: 880 x 240 ---------- */
+    .banner { width: 880px; height: 240px; border-radius: 16px; }
+    .banner::after {
+        content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+        height: 10px; background: var(--highlighter);
+    }
+    .banner .mark { position: absolute; left: 56px; top: 53px; width: 132px; height: 132px; }
+    .banner .text { position: absolute; left: 228px; right: 36px; top: 0; }
+    .banner .wordmark {
+        position: absolute; top: 44px; left: 0; right: 0;
+        font: 800 55.5px/1 "Archivo", sans-serif; font-stretch: 112%;
+        letter-spacing: -0.005em;
+    }
+    .banner .name {
+        position: absolute; top: 118.5px; left: 0; right: 0;
+        font: 600 34px/1 "Cascadia Code", monospace;
+    }
+    .banner .name .prompt { color: var(--highlighter); }
+    .banner .footer {
+        position: absolute; top: 180px; left: 0; right: 0;
+        font: 400 16px/1 "Cascadia Code", monospace; color: var(--tint);
+    }
+    .banner .footer .ps { color: var(--highlighter); }
+
+    /* ---------- Tile: 420 x 120 ---------- */
+    .tile { width: 420px; height: 120px; border-radius: 8px; }
+    .tile .icon {
+        position: absolute; left: 24px; top: 28px; width: 64px; height: 64px;
+        border-radius: 7px; background: var(--icon-tile);
+    }
+    .tile .text { position: absolute; left: 106px; right: 20px; top: 0; }
+    .tile .brand {
+        position: absolute; top: 40px; left: 0; right: 0;
+        font: 400 15px/1 "Archivo", sans-serif; color: var(--tint);
+    }
+    .tile .name {
+        position: absolute; top: 61px; left: 0; right: 0;
+        font: 600 22px/1 "Cascadia Code", monospace;
+    }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+    const params = new URLSearchParams(location.search);
+    const kind = params.get("kind") || "banner";
+    const name = params.get("name") || "Core";
+    const footer = params.get("footer") || "PS> Install-Module AsBuiltReport." + name;
+
+    const el = (tag, cls, text) => {
+        const node = document.createElement(tag);
+        if (cls) node.className = cls;
+        if (text !== undefined) node.textContent = text;
+        return node;
+    };
+
+    const root = document.getElementById("root");
+    const card = el("div", "card " + kind);
+    const text = el("div", "text");
+
+    if (kind === "tile") {
+        // Prompt mark in the highlighter colours, as on the existing org profile tiles.
+        const icon = el("div", "icon");
+        icon.innerHTML = '<svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">'
+            + '<path d="M17 21l13 11-13 11" fill="none" stroke="#FFD02B" stroke-width="5.5"/>'
+            + '<path d="M35 21h15M35 32h11" stroke="#9DB7E8" stroke-width="4"/>'
+            + '<path d="M35 43h17" stroke="#FFD02B" stroke-width="5.5"/></svg>';
+        card.append(icon);
+        text.append(el("div", "brand", "AsBuiltReport"));
+        text.append(el("div", "name fit", name));
+    } else {
+        const mark = el("img", "mark");
+        mark.src = "logo/asbuiltreport-mark-reversed.svg";
+        mark.alt = "";
+        card.append(mark);
+        text.append(el("div", "wordmark", "AsBuiltReport"));
+
+        const nameLine = el("div", "name fit");
+        nameLine.append(el("span", "prompt", "> "), document.createTextNode(name));
+        text.append(nameLine);
+
+        const footerLine = el("div", "footer fit");
+        if (footer.startsWith("PS> ")) {
+            footerLine.append(el("span", "ps", "PS> "), document.createTextNode(footer.slice(4)));
+        } else {
+            footerLine.textContent = footer;
+        }
+        text.append(footerLine);
+    }
+    card.append(text);
+    root.append(card);
+
+    // Shrinks each .fit line until it fits. Returns the lines that still overflow
+    // at the minimum size, so render.mjs can fail the run instead of cropping text.
+    window.fitLines = (minScale = 0.7) => {
+        const failures = [];
+        for (const line of document.querySelectorAll(".fit")) {
+            const start = parseFloat(getComputedStyle(line).fontSize);
+            let size = start;
+            while (line.scrollWidth > line.clientWidth && size > start * minScale) {
+                size -= 0.5;
+                line.style.fontSize = size + "px";
+            }
+            if (line.scrollWidth > line.clientWidth) failures.push(line.textContent);
+        }
+        return failures;
+    };
+</script>
+</body>
+</html>
