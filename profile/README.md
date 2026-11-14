@@ -21,36 +21,102 @@
 
 ## Features
 
-|||
-|-----------------------|-----------------------|
-| :memo: **Multiple Document Formats** | :world_map: **Multilingual Support** | 
-| Generate reports in one or more document formats, including DOCX, HTML, and Text. | Comprehensive [multilingual support](https://www.asbuiltreport.com/dev-guide/creating-a-report-module/#language-support-implementation) allows reports to be generated in [multiple languages](https://www.asbuiltreport.com/dev-guide/creating-a-report-module/#language-configuration), where available. | 
-| :microscope: **Granular Information Level** | :art: **Customised Styling** |
-| [Configure the information level](https://www.asbuiltreport.com/user-guide/new-asbuiltreportconfig/#understanding-infolevel) for each report section. You can create a summary report, a fully comprehensive report, or something in between. | Use the default style or [create your own](https://www.asbuiltreport.com/dev-guide/creating-a-report-style/) to match your corporate identity. Set page orientation, text and table formatting with fonts, colours, borders and highlighted cells and rows. |
-| :package: **Modular Architecture** | :hearts: **Health Checks** | 
-| The modular architecture and core framework enables users to use the same in-built commands to generate as-built configuration reports from a library of technology vendors. | [Enable health checks](https://www.asbuiltreport.com/user-guide/quickstart/#enable-health-checks) to highlight configuration issues within a report. Toggle individual health checks on or off as required. |
-| :email: **Email Reports** | | |
-| Attach and send reports via email to one or more recipients. | | |
+<table width="100%">
+    <tr>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/multiple-document-formats.png" alt="Multiple Document Formats" width="100%"><br>
+            Generate reports in one or more document formats, including DOCX, HTML, and Text.
+        </td>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/multilingual-support.png" alt="Multilingual Support" width="100%"><br>
+            Comprehensive <a href="https://www.asbuiltreport.com/dev-guide/creating-a-report-module/#language-support-implementation">multilingual support</a> allows reports to be generated in <a href="https://www.asbuiltreport.com/dev-guide/creating-a-report-module/#language-configuration">multiple languages</a>, where available.
+        </td>
+    </tr>
+    <tr>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/granular-information-level.png" alt="Granular Information Level" width="100%"><br>
+            <a href="https://www.asbuiltreport.com/user-guide/new-asbuiltreportconfig/#understanding-infolevel">Configure the information level</a> for each report section. You can create a summary report, a fully comprehensive report, or something in between.
+        </td>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/customised-styling.png" alt="Customised Styling" width="100%"><br>
+            Use the default style or <a href="https://www.asbuiltreport.com/dev-guide/creating-a-report-style/">create your own</a> to match your corporate identity. Set page orientation, text and table formatting with fonts, colours, borders and highlighted cells and rows.
+        </td>
+    </tr>
+    <tr>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/modular-architecture.png" alt="Modular Architecture" width="100%"><br>
+            The modular architecture and core framework enables users to use the same in-built commands to generate as-built configuration reports from a library of technology vendors.
+        </td>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/health-checks.png" alt="Health Checks" width="100%"><br>
+            <a href="https://www.asbuiltreport.com/user-guide/quickstart/#enable-health-checks">Enable health checks</a> to highlight configuration issues within a report. Toggle individual health checks on or off as required.
+        </td>
+    </tr>
+    <tr>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/email-reports.png" alt="Email Reports" width="100%"><br>
+            Attach and send reports via email to one or more recipients.
+        </td>
+        <td width="50%"></td>
+    </tr>
+</table>
 
 ## Use Cases
 
-|||
-|-----------------------|-----------------------|
-| :heavy_check_mark: **Compliance Audits** | :arrows_clockwise: **Change Management** |
-| Generate point-in-time infrastructure documentation for ISO 27001, SOC 2, PCI-DSS, and other compliance frameworks. | Produce before-and-after documentation for change advisory board (CAB) submissions and post-change verification. |
-| :handshake: **Environment Handover** | :shield: **Disaster Recovery** | 
-| Accelerate onboarding and handover with comprehensive, consistent infrastructure documentation generated on demand. | Maintain accurate as-built records of your infrastructure to support disaster recovery planning and runbook validation. |
+<table width="100%">
+    <tr>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/compliance-audits.png" alt="Compliance Audits" width="100%"><br>
+            Generate point-in-time infrastructure documentation for ISO 27001, SOC 2, PCI-DSS, and other compliance frameworks.
+        </td>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/change-management.png" alt="Change Management" width="100%"><br>
+            Produce before-and-after documentation for change advisory board (CAB) submissions and post-change verification.
+        </td>
+    </tr>
+    <tr>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/environment-handover.png" alt="Environment Handover" width="100%"><br>
+            Accelerate onboarding and handover with comprehensive, consistent infrastructure documentation generated on demand.
+        </td>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/disaster-recovery.png" alt="Disaster Recovery" width="100%"><br>
+            Maintain accurate as-built records of your infrastructure to support disaster recovery planning and runbook validation.
+        </td>
+    </tr>
+</table>
 
 ## Components
 
-|||
-| :-----------------------| :-----------------------|
-| 📦 **Core Module** | 📦 **Reports Module** |
-| The core module provides the framework for each individual report module. It provides the [base commands](https://www.asbuiltreport.com/user-guide/new-asbuiltreport/) and default style script used to generate each individual report. | The report module is specific to each vendor and/or technology and is used to extract information from the specific environment.<br><br>The report module will be written to utilise PowerShell modules or RESTful APIs which the vendor/technology provides. |
-| ⚙️ **Core Module Configuration** | ⚙️ **Reports Module Configuration** |
-|The core module configuration is a JSON file which stores information relating to the author’s name, company information & SMTP mail server configuration.<br><br>Individual core module configuration files can be saved and specified when generating reports. | The reports module configuration is a JSON file which stores information specific to the related report. It holds information such as the report name, version, and release status.<br><br>The report configuration can also provide functionality such as configurable report options, health checks and granular information levels.<br><br>Individual report module configuration files can be saved and specified when generating reports. |
-| 🖌️ **Styles Script** |
-| The styles script sets the default layout, fonts, colours and sizes used within the report.<br><br>Style scripts can be used to layout cover pages, table of contents and other unique tables or sections.<br><br>Custom style scripts can be created to format reports to match your corporate identity. |
+<table width="100%">
+    <tr>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/core-module.png" alt="Core Module" width="100%"><br>
+            The core module provides the framework for each individual report module. It provides the <a href="https://www.asbuiltreport.com/user-guide/new-asbuiltreport/">base commands</a> and default style script used to generate each individual report.
+        </td>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/reports-module.png" alt="Reports Module" width="100%"><br>
+            The report module is specific to each vendor and/or technology and is used to extract information from the specific environment.<br><br>The report module will be written to utilise PowerShell modules or RESTful APIs which the vendor/technology provides.
+        </td>
+    </tr>
+    <tr>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/core-module-configuration.png" alt="Core Module Configuration" width="100%"><br>
+            The core module configuration is a JSON file which stores information relating to the author’s name, company information & SMTP mail server configuration.<br><br>Individual core module configuration files can be saved and specified when generating reports.
+        </td>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/reports-module-configuration.png" alt="Reports Module Configuration" width="100%"><br>
+            The reports module configuration is a JSON file which stores information specific to the related report. It holds information such as the report name, version, and release status.<br><br>The report configuration can also provide functionality such as configurable report options, health checks and granular information levels.<br><br>Individual report module configuration files can be saved and specified when generating reports.
+        </td>
+    </tr>
+    <tr>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/styles-script.png" alt="Styles Script" width="100%"><br>
+            The styles script sets the default layout, fonts, colours and sizes used within the report.<br><br>Style scripts can be used to layout cover pages, table of contents and other unique tables or sections.<br><br>Custom style scripts can be created to format reports to match your corporate identity.
+        </td>
+        <td width="50%"></td>
+    </tr>
+</table>
 
 ## Report Modules
 
