@@ -1,0 +1,22 @@
+{
+    "_comment": "Section icons for report module READMEs. octicon is the 16 px Octicons glyph. headings are the README heading texts (after any emoji, ignoring case) that the icon replaces the emoji on.",
+    "icons": [
+        { "name": "getting-started", "octicon": "rocket", "label": "Getting Started", "headings": ["Getting Started"] },
+        { "name": "supported-versions", "octicon": "versions", "label": "Supported Versions", "headings": ["Supported Versions"] },
+        { "name": "unsupported-versions", "octicon": "circle-slash", "label": "Unsupported Versions", "headings": ["Unsupported Versions"] },
+        { "name": "system-requirements", "octicon": "tools", "label": "System Requirements", "headings": ["System Requirements"] },
+        { "name": "required-privileges", "octicon": "shield-lock", "label": "Required Privileges", "headings": ["Required Privileges"] },
+        { "name": "authentication", "octicon": "key", "label": "Authentication Methods", "headings": ["Authentication Methods", "Authentication"] },
+        { "name": "language-support", "octicon": "globe", "label": "Language Support", "headings": ["Language Support"] },
+        { "name": "module-installation", "octicon": "download", "label": "Module Installation", "headings": ["Module Installation"] },
+        { "name": "configuration", "octicon": "gear", "label": "Configuration", "headings": ["Configuration"] },
+        { "name": "examples", "octicon": "terminal", "label": "Examples", "headings": ["Examples", "GUI Examples", "Pwsh 5.1/7 Console Examples", "Pwsh 7 GUI Examples"] },
+        { "name": "example-index", "octicon": "list-unordered", "label": "Example Index", "headings": ["Example Index"] },
+        { "name": "commands", "octicon": "code", "label": "Commands", "headings": ["Commands"] },
+        { "name": "sample-reports", "octicon": "book", "label": "Sample Reports", "headings": ["Sample Reports"] },
+        { "name": "export-diagrams", "octicon": "workflow", "label": "Export Diagrams", "headings": ["Export Diagrams"] },
+        { "name": "log-collection", "octicon": "log", "label": "Log Collection", "headings": ["Log Collection"] },
+        { "name": "known-issues", "octicon": "bug", "label": "Known Issues", "headings": ["Known Issues"] },
+        { "name": "in-development", "octicon": "alert", "label": "In development notice", "headings": ["This AsBuiltReport module is currently in development and might not yet be functional"] }
+    ]
+}

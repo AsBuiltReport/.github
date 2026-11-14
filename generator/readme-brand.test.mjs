@@ -1,0 +1,90 @@
+// Tests for readme-brand.mjs: the banner, section icon and badge changes made to module READMEs.
+// Nothing is stubbed: the functions are pure and read only section-icons.json and repos.json.
+// Run from this folder: node --test
+// To check against the live READMEs as well, set README_DIR to a folder of downloaded README files.
+
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { addBanner, addSectionIcons, recolourBadge, recolourBadges, applyBrand } from "./readme-brand.mjs";
+
+const icon = (name, size) => `<img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/assets/section-icons/${name}.svg" alt="" width="${size}" height="${size}" align="top">`;
+
+test("replaces the emoji on known section headings, sized to the heading level", () => {
+    const input = "# :beginner: Getting Started\n## :package: Module Installation\n### :closed_lock_with_key: Required Privileges";
+    const expected = `# ${icon("getting-started", 28)} Getting Started\n## ${icon("module-installation", 24)} Module Installation\n### ${icon("required-privileges", 20)} Required Privileges`;
+    assert.equal(addSectionIcons(input), expected);
+});
+
+test("handles Unicode emoji, including variation selectors", () => {
+    assert.equal(addSectionIcons("## 🗺️ Language Support"), `## ${icon("language-support", 24)} Language Support`);
+    assert.equal(addSectionIcons("## 🌐 Language Support"), `## ${icon("language-support", 24)} Language Support`);
+});
+
+test("maps every Known Issues emoji variant to the same icon", () => {
+    for (const e of [":x:", ":bug:", ":exclamation:", ":rotating_light:"]) {
+        assert.equal(addSectionIcons(`## ${e} Known Issues`), `## ${icon("known-issues", 24)} Known Issues`);
+    }
+});
+
+test("drops a trailing emoji and keeps the heading text as written", () => {
+    const input = "## :exclamation: THIS ASBUILTREPORT MODULE IS CURRENTLY IN DEVELOPMENT AND MIGHT NOT YET BE FUNCTIONAL ❗";
+    assert.equal(addSectionIcons(input), `## ${icon("in-development", 24)} THIS ASBUILTREPORT MODULE IS CURRENTLY IN DEVELOPMENT AND MIGHT NOT YET BE FUNCTIONAL`);
+});
+
+test("leaves headings inside fenced code blocks alone", () => {
+    const input = "```powershell\n# Examples\nInstall-Module Foo\n```\n## :computer: Examples";
+    assert.equal(addSectionIcons(input), `\`\`\`powershell\n# Examples\nInstall-Module Foo\n\`\`\`\n## ${icon("examples", 24)} Examples`);
+});
+
+test("leaves unknown headings, and deep headings without an emoji, alone", () => {
+    const input = "### Report\n## :tada: Something Else\n#### Configuration";
+    assert.equal(addSectionIcons(input), input);
+});
+
+test("is idempotent and keeps CRLF line endings", () => {
+    const once = addSectionIcons("# :beginner: Getting Started\r\nText\r\n");
+    assert.equal(addSectionIcons(once), once);
+    assert.ok(!once.replace(/\r\n/g, "").includes("\n"));
+});
+
+test("recolours badges by kind and leaves others alone", () => {
+    assert.equal(recolourBadge("https://img.shields.io/powershellgallery/v/AsBuiltReport.Core.svg"), "https://img.shields.io/powershellgallery/v/AsBuiltReport.Core.svg?color=1F5FD0");
+    assert.equal(recolourBadge("https://img.shields.io/powershellgallery/dt/AsBuiltReport.Core.svg"), "https://img.shields.io/powershellgallery/dt/AsBuiltReport.Core.svg?color=012456");
+    assert.equal(recolourBadge("https://img.shields.io/github/contributors/AsBuiltReport/AsBuiltReport.Core.svg"), "https://img.shields.io/github/contributors/AsBuiltReport/AsBuiltReport.Core.svg?color=012456");
+    assert.equal(recolourBadge("https://img.shields.io/powershellgallery/p/AsBuiltReport.Core.svg"), "https://img.shields.io/powershellgallery/p/AsBuiltReport.Core.svg?color=FFD02B");
+    const licence = "https://img.shields.io/github/license/AsBuiltReport/AsBuiltReport.Core.svg";
+    assert.equal(recolourBadge(licence), licence);
+});
+
+test("replaces an existing colour and keeps other query parameters", () => {
+    assert.equal(recolourBadge("https://img.shields.io/powershellgallery/v/X?style=flat&color=red"), "https://img.shields.io/powershellgallery/v/X?color=1F5FD0&style=flat");
+    assert.equal(recolourBadges('<img src="https://img.shields.io/powershellgallery/v/X.svg" />'), '<img src="https://img.shields.io/powershellgallery/v/X.svg?color=1F5FD0" />');
+});
+
+test("adds the banner once", () => {
+    const readme = "<p align=\"center\">\n    <a href=\"https://www.asbuiltreport.com/\" alt=\"AsBuiltReport\"></a>\n            <img src='https://github.com/AsBuiltReport.png' width=\"8%\" height=\"8%\" /></a>\n</p>\nText";
+    const once = addBanner(readme, "AsBuiltReport.Core");
+    assert.match(once, /repo-banners\/AsBuiltReport\.Core\.png/);
+    assert.equal(addBanner(once, "AsBuiltReport.Core"), once);
+});
+
+// Runs the full change over real READMEs: every emoji section heading gets an icon,
+// nothing outside headings, badge URLs and the logo block changes, and a second run changes nothing.
+const readmeDir = process.env.README_DIR;
+if (readmeDir) {
+    for (const file of readdirSync(readmeDir).filter((f) => f.endsWith(".md"))) {
+        test(`real README: ${file}`, () => {
+            const repo = file.replace(/\.md$/, "");
+            const before = readFileSync(join(readmeDir, file), "utf8");
+            const after = applyBrand(before, repo);
+            assert.equal(applyBrand(after, repo), after, "second run changes nothing");
+            const lines = (t) => t.split(/\r?\n/);
+            const changed = lines(after).filter((l, i, all) => !lines(before).includes(l));
+            for (const line of changed) {
+                assert.ok(/section-icons\/|img\.shields\.io|repo-banners\/|^<p align="center">$|^\s*<a href="https:\/\/www\.asbuiltreport\.com\/">$|^<\/p>$/.test(line), `unexpected change: ${line}`);
+            }
+        });
+    }
+}
