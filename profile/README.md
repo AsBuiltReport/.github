@@ -1,6 +1,7 @@
 <p align="center">
-    <a href="https://www.asbuiltreport.com/" alt="AsBuiltReport"></a>
-            <img src='https://github.com/AsBuiltReport.png' width="15%" height="15%" /></a>
+    <a href="https://www.asbuiltreport.com/">
+        <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/assets/org-banner.png" alt="AsBuiltReport - Document your datacenter with PowerShell" width="880">
+    </a>
 </p>
 
 <h1 style="font-size:5vw" align="center">
