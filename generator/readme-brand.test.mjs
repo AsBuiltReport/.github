@@ -7,7 +7,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { addBanner, addSectionIcons, recolourBadge, recolourBadges, replaceHighlightSwatches, unmappedPlaceholders, swatchUrl, applyBrand } from "./readme-brand.mjs";
+import { addBanner, addSectionIcons, recolourBadge, recolourBadges, replaceHighlightSwatches, unmappedPlaceholders, swatchUrl, removeTitleHeading, removeFollowBadge, applyBrand } from "./readme-brand.mjs";
 
 const icon = (name, size) => `<img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/assets/section-icons/${name}.svg" alt="" width="${size}" height="${size}" align="top">`;
 
@@ -88,6 +88,40 @@ test("leaves a placeholder alone when neither the style name nor the colour is k
     assert.deepEqual(unmappedPlaceholders(unknown), [unknown]);
 });
 
+test("removes the title heading and the blank line after it", () => {
+    const readme = "</p>\n<!-- ********** DO NOT EDIT THESE LINKS ********** -->\n\n# VMware vSphere As Built Report\n\nVMware vSphere As Built Report is a PowerShell module";
+    assert.equal(removeTitleHeading(readme), "</p>\n<!-- ********** DO NOT EDIT THESE LINKS ********** -->\n\nVMware vSphere As Built Report is a PowerShell module");
+    assert.equal(removeTitleHeading("# AsBuiltReport.Core\r\n\r\nText\r\n"), "Text\r\n");
+});
+
+// Microsoft.Azure has no title: its first heading is Getting Started, which must stay.
+test("keeps the first heading when it is a known section or not level 1", () => {
+    const azure = "Intro\n\n# :beginner: Getting Started\n\nText";
+    assert.equal(removeTitleHeading(azure), azure);
+    const iconed = `# ${icon("getting-started", 28)} Getting Started`;
+    assert.equal(removeTitleHeading(iconed), iconed);
+    const late = "## :wrench: System Requirements\n# Later Heading";
+    assert.equal(removeTitleHeading(late), late);
+});
+
+// Microsoft.AD, Microsoft.SCVMM, Veeam.VB365 and Veeam.VBR put a "community maintained" notice above the title.
+test("skips lower level headings above the title", () => {
+    const readme = "#### This project is community maintained\n\n# Microsoft AD As Built Report\n\nText\n\n# :books: Sample Reports";
+    assert.equal(removeTitleHeading(readme), "#### This project is community maintained\n\nText\n\n# :books: Sample Reports");
+});
+
+test("ignores # lines in code blocks when finding the title", () => {
+    const readme = "```powershell\n# Install\n```\n# Rubrik CDM As Built Report\n\nText";
+    assert.equal(removeTitleHeading(readme), "```powershell\n# Install\n```\nText");
+});
+
+test("removes the follow @AsBuiltReport badge paragraph only", () => {
+    const badge = '<p align="center">\n    <a href="https://twitter.com/AsBuiltReport" alt="Twitter">\n            <img src="https://img.shields.io/twitter/follow/AsBuiltReport.svg?style=social"/></a>\n</p>\n';
+    assert.equal(removeFollowBadge(`</p>\n${badge}<!-- comment -->`), "</p>\n<!-- comment -->");
+    const other = badge.replace(/AsBuiltReport/g, "rebelinux");
+    assert.equal(removeFollowBadge(other), other);
+});
+
 test("adds the banner once", () => {
     const readme = "<p align=\"center\">\n    <a href=\"https://www.asbuiltreport.com/\" alt=\"AsBuiltReport\"></a>\n            <img src='https://github.com/AsBuiltReport.png' width=\"8%\" height=\"8%\" /></a>\n</p>\nText";
     const once = addBanner(readme, "AsBuiltReport.Core");
@@ -106,6 +140,8 @@ if (readmeDir) {
             const after = applyBrand(before, repo);
             assert.equal(applyBrand(after, repo), after, "second run changes nothing");
             assert.deepEqual(unmappedPlaceholders(after), [], "no placeholder images left");
+            assert.ok(!/(?:twitter|x)\.com\/AsBuiltReport\b/i.test(after), "no follow @AsBuiltReport badge left");
+            assert.equal(removeTitleHeading(after), after, "no title heading left");
             const lines = (t) => t.split(/\r?\n/);
             const changed = lines(after).filter((l, i, all) => !lines(before).includes(l));
             for (const line of changed) {

@@ -3,6 +3,8 @@
 //   addSectionIcons  section icons in place of the emoji on known section headings
 //   recolourBadges   shields.io badges in the brand palette
 //   replaceHighlightSwatches  central health check highlight swatches in place of placeholder services
+//   removeTitleHeading        the title heading, which the banner repeats
+//   removeFollowBadge         the X (Twitter) follow @AsBuiltReport badge
 // readme-banners.mjs uses these to open pull requests. readme-brand.test.mjs tests them.
 
 import { readFileSync } from "node:fs";
@@ -135,6 +137,46 @@ export function unmappedPlaceholders(readme) {
     return [...readme.matchAll(placeholderImage)].map((m) => m[0]);
 }
 
+// ---------- Title heading and follow badge ----------
+
+// The banner already names the repo, so the title heading below the badges
+// ("# VMware vSphere As Built Report", "# AsBuiltReport.Core") repeats it. The title is the
+// first level 1 heading, as long as no known section heading comes before it. Lower level
+// headings before it, such as the "community maintained" notice in some READMEs, are skipped.
+// It is removed with the blank line after it.
+export function removeTitleHeading(readme) {
+    const eol = eolOf(readme);
+    const lines = readme.split(/\r?\n/);
+    let fence = null;
+    for (let i = 0; i < lines.length; i++) {
+        const fenceMatch = lines[i].match(/^\s*(`{3,}|~{3,})/);
+        if (fenceMatch) {
+            if (!fence) fence = fenceMatch[1][0];
+            else if (fenceMatch[1][0] === fence) fence = null;
+            continue;
+        }
+        if (fence) continue;
+        const heading = lines[i].match(/^(#{1,6})\s+(.*?)\s*$/);
+        if (!heading) continue;
+        // Once the known sections start, there is no title to remove.
+        const text = heading[2].replace(leadingEmoji, "").replace(trailingEmoji, "").trim();
+        if (heading[2].includes("/assets/section-icons/") || iconByHeading.has(normalise(text))) return readme;
+        if (heading[1].length !== 1) continue;
+        lines.splice(i, lines[i + 1] !== undefined && lines[i + 1].trim() === "" ? 2 : 1);
+        return lines.join(eol);
+    }
+    return readme;
+}
+
+// The X (Twitter) follow badge for @AsBuiltReport, in its own centred paragraph.
+// Follow badges for other accounts are left alone.
+const followBadge = /<p align="center">\s*<a href="https?:\/\/(?:www\.)?(?:twitter|x)\.com\/AsBuiltReport\/?"[^>]*>\s*<img src="https:\/\/img\.shields\.io\/(?:twitter|x)\/follow\/AsBuiltReport[^"]*"\s*\/?>\s*<\/a>\s*<\/p>[ \t]*\r?\n?/gi;
+
+export function removeFollowBadge(readme) {
+    return readme.replace(followBadge, "");
+}
+
 export function applyBrand(readme, repo) {
-    return replaceHighlightSwatches(recolourBadges(addSectionIcons(addBanner(readme, repo))), repo);
+    const branded = replaceHighlightSwatches(recolourBadges(addSectionIcons(addBanner(readme, repo))), repo);
+    return removeTitleHeading(removeFollowBadge(branded));
 }
