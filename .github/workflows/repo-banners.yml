@@ -1,6 +1,7 @@
 # Renders the README banner for every public AsBuiltReport.* repo into assets/repo-banners/,
-# the organisation profile tiles into profile/images/tiles/, and the README section icon pack
-# into assets/section-icons/, then commits any that changed.
+# the organisation profile tiles into profile/images/tiles/, the README section icon pack
+# into assets/section-icons/, and the health check highlight swatches into
+# assets/highlight-swatches/, then commits any that changed.
 # On a pull request it renders without committing, and uploads the images for review.
 # The generator lives in generator/. Run it by hand after creating a new repo, or wait for the daily run.
 name: Repo banners
@@ -57,6 +58,10 @@ jobs:
         working-directory: generator
         run: node section-icons.mjs
 
+      - name: Render highlight swatches
+        working-directory: generator
+        run: node highlight-swatches.mjs
+
       - name: Render banners and tiles
         working-directory: generator
         env:
@@ -77,17 +82,18 @@ jobs:
           path: |
             assets/repo-banners
             assets/section-icons
+            assets/highlight-swatches
             profile/images/tiles
 
       - name: Commit changes
         if: github.event_name != 'pull_request'
         run: |
-          git add assets/repo-banners assets/section-icons profile/images/tiles
+          git add assets/repo-banners assets/section-icons assets/highlight-swatches profile/images/tiles
           if git diff --cached --quiet; then
             echo "No banner changes"
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Update repo banners, profile tiles and section icons'
+          git commit -m 'Update repo banners, profile tiles, section icons and highlight swatches'
           git push

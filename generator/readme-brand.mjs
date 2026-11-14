@@ -2,6 +2,7 @@
 //   addBanner        the repo banner in place of the old organisation logo
 //   addSectionIcons  section icons in place of the emoji on known section headings
 //   recolourBadges   shields.io badges in the brand palette
+//   replaceHighlightSwatches  central health check highlight swatches in place of placeholder services
 // readme-banners.mjs uses these to open pull requests. readme-brand.test.mjs tests them.
 
 import { readFileSync } from "node:fs";
@@ -103,6 +104,37 @@ export function recolourBadges(readme) {
     return readme.replace(/https:\/\/img\.shields\.io\/[^\s"'()<>]+/g, recolourBadge);
 }
 
+// ---------- Highlight swatches ----------
+
+// HealthCheck tables show each highlight colour as a small image from a third-party placeholder
+// service, which often breaks. These are replaced with the central swatches. The colour comes from
+// the repo's report style (highlight-swatches.json), not the old link, because some READMEs show
+// colours copied from another module's style.
+const { styles } = JSON.parse(readFileSync(join(here, "highlight-swatches.json"), "utf8"));
+const placeholderImage = /!\[([^\]]*)\]\((https?:\/\/(?:placehold\.co|place-hold\.it|via\.placeholder\.com|dummyimage\.com)\/[^)\s]*)\)/g;
+const styleLabels = { critical: "Critical", citical: "Critical", warning: "Warning", info: "Info", ok: "OK" };
+
+export function swatchUrl(hex) {
+    return `${assetBase}/highlight-swatches/${hex}.svg`;
+}
+
+export function replaceHighlightSwatches(readme, repo) {
+    const colours = (styles[repo] || styles.default).colours;
+    const known = new Set(Object.values(styles).flatMap((s) => Object.values(s.colours)));
+    return readme.replace(placeholderImage, (match, alt, url) => {
+        const label = styleLabels[alt.trim().toLowerCase()];
+        if (label && colours[label]) return `![${label}](${swatchUrl(colours[label])})`;
+        // Unknown style name: keep the link's own colour when there is a swatch for it.
+        const hex = (url.match(/(?<![0-9A-Fa-f])[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/) || [""])[0].toUpperCase();
+        return known.has(hex) ? `![${alt}](${swatchUrl(hex)})` : match;
+    });
+}
+
+// Placeholder images that replaceHighlightSwatches could not map, for the dry run to report.
+export function unmappedPlaceholders(readme) {
+    return [...readme.matchAll(placeholderImage)].map((m) => m[0]);
+}
+
 export function applyBrand(readme, repo) {
-    return recolourBadges(addSectionIcons(addBanner(readme, repo)));
+    return replaceHighlightSwatches(recolourBadges(addSectionIcons(addBanner(readme, repo))), repo);
 }

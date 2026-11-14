@@ -1,5 +1,5 @@
-// Tests for readme-brand.mjs: the banner, section icon and badge changes made to module READMEs.
-// Nothing is stubbed: the functions are pure and read only section-icons.json and repos.json.
+// Tests for readme-brand.mjs: the banner, section icon, badge and highlight swatch changes made to module READMEs.
+// Nothing is stubbed: the functions are pure and read only section-icons.json, highlight-swatches.json and repos.json.
 // Run from this folder: node --test
 // To check against the live READMEs as well, set README_DIR to a folder of downloaded README files.
 
@@ -7,7 +7,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { addBanner, addSectionIcons, recolourBadge, recolourBadges, applyBrand } from "./readme-brand.mjs";
+import { addBanner, addSectionIcons, recolourBadge, recolourBadges, replaceHighlightSwatches, unmappedPlaceholders, swatchUrl, applyBrand } from "./readme-brand.mjs";
 
 const icon = (name, size) => `<img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/assets/section-icons/${name}.svg" alt="" width="${size}" height="${size}" align="top">`;
 
@@ -63,6 +63,31 @@ test("replaces an existing colour and keeps other query parameters", () => {
     assert.equal(recolourBadges('<img src="https://img.shields.io/powershellgallery/v/X.svg" />'), '<img src="https://img.shields.io/powershellgallery/v/X.svg?color=1F5FD0" />');
 });
 
+test("replaces placeholder services with the central swatch for the repo's style", () => {
+    const row = "| ![Warning](https://placehold.co/15x15/FFF4C7/FFF4C7) Unknown<br> ![Critical](https://place-hold.it/15/FEDDD7/FEDDD7.png) Offline |";
+    assert.equal(replaceHighlightSwatches(row, "AsBuiltReport.VMware.vSphere"), `| ![Warning](${swatchUrl("FFF4C7")}) Unknown<br> ![Critical](${swatchUrl("FEDDD7")}) Offline |`);
+});
+
+// VMware.ESXi showed PureStorage's colours and Azure an Info colour from no style. Both reports use the Core style.
+test("uses the report style's colour, not the colour in the old link", () => {
+    assert.equal(replaceHighlightSwatches("![Warning](https://place-hold.it/15/FFE860/FFE860.png)", "AsBuiltReport.VMware.ESXi"), `![Warning](${swatchUrl("FFF4C7")})`);
+    assert.equal(replaceHighlightSwatches("![Info](https://placehold.co/15x15/D4E4F7/D4E4F7)", "AsBuiltReport.Microsoft.Azure"), `![Info](${swatchUrl("E3F5FC")})`);
+});
+
+test("uses a module's own style where it has one", () => {
+    assert.equal(replaceHighlightSwatches("![Warning](https://via.placeholder.com/15/FFBC0B/FFBC0B.png)", "AsBuiltReport.Nutanix.PrismElement"), `![Warning](${swatchUrl("FFBC0B")})`);
+});
+
+test("corrects the Citical alt text typo", () => {
+    assert.equal(replaceHighlightSwatches("![Citical](https://placehold.co/15x15/FEDDD7/FEDDD7)", "AsBuiltReport.Microsoft.Azure"), `![Critical](${swatchUrl("FEDDD7")})`);
+});
+
+test("leaves a placeholder alone when neither the style name nor the colour is known", () => {
+    const unknown = "![Odd](https://placehold.co/15x15/123456/123456)";
+    assert.equal(replaceHighlightSwatches(unknown, "AsBuiltReport.Core"), unknown);
+    assert.deepEqual(unmappedPlaceholders(unknown), [unknown]);
+});
+
 test("adds the banner once", () => {
     const readme = "<p align=\"center\">\n    <a href=\"https://www.asbuiltreport.com/\" alt=\"AsBuiltReport\"></a>\n            <img src='https://github.com/AsBuiltReport.png' width=\"8%\" height=\"8%\" /></a>\n</p>\nText";
     const once = addBanner(readme, "AsBuiltReport.Core");
@@ -80,10 +105,11 @@ if (readmeDir) {
             const before = readFileSync(join(readmeDir, file), "utf8");
             const after = applyBrand(before, repo);
             assert.equal(applyBrand(after, repo), after, "second run changes nothing");
+            assert.deepEqual(unmappedPlaceholders(after), [], "no placeholder images left");
             const lines = (t) => t.split(/\r?\n/);
             const changed = lines(after).filter((l, i, all) => !lines(before).includes(l));
             for (const line of changed) {
-                assert.ok(/section-icons\/|img\.shields\.io|repo-banners\/|^<p align="center">$|^\s*<a href="https:\/\/www\.asbuiltreport\.com\/">$|^<\/p>$/.test(line), `unexpected change: ${line}`);
+                assert.ok(/section-icons\/|highlight-swatches\/|img\.shields\.io|repo-banners\/|^<p align="center">$|^\s*<a href="https:\/\/www\.asbuiltreport\.com\/">$|^<\/p>$/.test(line), `unexpected change: ${line}`);
             }
         });
     }
