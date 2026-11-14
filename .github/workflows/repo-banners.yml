@@ -1,0 +1,83 @@
+# Renders the README banner for every public AsBuiltReport.* repo into assets/repo-banners/,
+# and the organisation profile tiles into profile/images/tiles/, then commits any that changed.
+# On a pull request it renders without committing, and uploads the images for review.
+# The generator lives in generator/. Run it by hand after creating a new repo, or wait for the daily run.
+name: Repo banners
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'generator/**'
+      - '.github/workflows/repo-banners.yml'
+  pull_request:
+    paths:
+      - 'generator/**'
+      - '.github/workflows/repo-banners.yml'
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: 'Render only these repos (comma separated, for example AsBuiltReport.Microsoft.Azure). Leave empty for all.'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repo-banners
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: generator/package-lock.json
+
+      - name: Install Playwright
+        working-directory: generator
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Render banners and tiles
+        working-directory: generator
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_INPUT: ${{ github.event.inputs.repo }}
+        run: |
+          if [ -n "$REPO_INPUT" ]; then
+            node render.mjs --repo "$REPO_INPUT"
+          else
+            node render.mjs
+          fi
+
+      - name: Upload images for review
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: repo-banners
+          path: |
+            assets/repo-banners
+            profile/images/tiles
+
+      - name: Commit changes
+        if: github.event_name != 'pull_request'
+        run: |
+          git add assets/repo-banners profile/images/tiles
+          if git diff --cached --quiet; then
+            echo "No banner changes"
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Update repo banners and profile tiles'
+          git push

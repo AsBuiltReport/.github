@@ -1,0 +1,18 @@
+{
+    "org": "AsBuiltReport",
+    "exclude": [
+        "AsBuiltReport.github.io",
+        "AsBuiltReport.GitHub.Discussions"
+    ],
+    "noTile": [
+        "AsBuiltReport.Project.Website",
+        "AsBuiltReport.Plaster.Template"
+    ],
+    "noReadmeBanner": [
+        "AsBuiltReport.Project.Website",
+        "AsBuiltReport.Plaster.Template"
+    ],
+    "footers": {
+        "AsBuiltReport.Project.Website": "www.asbuiltreport.com"
+    }
+}
