@@ -16,44 +16,15 @@ import { chromium } from "playwright";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { pathToFileURL } from "node:url";
+import { config, here, prefix, listOrgRepos, parseRepoArgs } from "./repos.mjs";
 
-const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = join(here, "..");
-const config = JSON.parse(await readFile(join(here, "repos.json"), "utf8"));
-const prefix = "AsBuiltReport.";
 
 const sizes = {
     banner: { width: 880, height: 240, folder: "assets/repo-banners" },
     tile: { width: 420, height: 120, folder: "profile/images/tiles" },
 };
-
-function parseArgs(argv) {
-    const repos = [];
-    for (let i = 0; i < argv.length; i++) {
-        if (argv[i] === "--repo" && argv[i + 1]) repos.push(...argv[++i].split(",").map((r) => r.trim()).filter(Boolean));
-    }
-    return { repos };
-}
-
-async function listOrgRepos() {
-    const headers = { Accept: "application/vnd.github+json", "User-Agent": "asbuiltreport-repo-banners" };
-    if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-    const repos = [];
-    for (let page = 1; ; page++) {
-        const url = `https://api.github.com/orgs/${config.org}/repos?type=public&per_page=100&page=${page}`;
-        const response = await fetch(url, { headers });
-        if (!response.ok) throw new Error(`GitHub API returned ${response.status} for ${url}`);
-        const batch = await response.json();
-        repos.push(...batch);
-        if (batch.length < 100) break;
-    }
-    return repos
-        .filter((r) => r.name.startsWith(prefix) && !r.archived && !r.fork && !r.private)
-        .filter((r) => !config.exclude.includes(r.name))
-        .map((r) => r.name)
-        .sort();
-}
 
 // A module that is not on the PowerShell Gallery gets its GitHub URL instead of an
 // Install-Module command, so the banner never shows a command that fails.
@@ -94,8 +65,8 @@ async function render(page, kind, repo, footer) {
     return true;
 }
 
-const { repos: requested } = parseArgs(process.argv.slice(2));
-const repos = requested.length ? requested : await listOrgRepos();
+const requested = parseRepoArgs(process.argv.slice(2));
+const repos = requested.length ? requested : (await listOrgRepos()).map((r) => r.name);
 console.log(`Rendering ${repos.length} repos`);
 
 const browser = await chromium.launch();

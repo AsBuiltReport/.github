@@ -27,6 +27,13 @@ The [Repo banners](../.github/workflows/repo-banners.yml) workflow runs daily, o
 
 New modules get this from the [Plaster template](https://github.com/AsBuiltReport/AsBuiltReport.Plaster.Template).
 
+For existing repos, `readme-banners.mjs` opens a pull request in each one that replaces the old logo at the top of the README with the banner (or adds the banner at the top when there is no logo). It skips repos that already use the banner or already have the pull request open. It is a dry run unless you pass `--apply`:
+
+```sh
+GITHUB_TOKEN=$(gh auth token) node readme-banners.mjs --out ./preview   # dry run, writes the new READMEs to ./preview
+GITHUB_TOKEN=$(gh auth token) node readme-banners.mjs --apply           # opens the pull requests
+```
+
 ## Running it locally
 
 Needs Node.js 22 or later.
