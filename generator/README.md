@@ -47,6 +47,8 @@ New modules get this from the [Plaster template](https://github.com/AsBuiltRepor
 - section icons in place of the emoji on known section headings, sized to the heading level (headings inside code blocks are left alone)
 - badges in the brand palette: link blue `#1F5FD0` for versions, console blue `#012456` for counts (downloads, contributors), highlighter `#FFD02B` for compatibility (platform)
 - central highlight swatches in place of placeholder images, in the colour the repo's report style uses (by the image's alt text: `Critical`, `Warning`, `Info` or `OK`), so a README never shows a colour the report does not use
+- the title heading below the badges removed (for example `# VMware vSphere As Built Report`), because the banner already names the repo. This is the first level 1 heading before any known section; a README without one is left alone
+- the X (Twitter) follow @AsBuiltReport badge removed (follow badges for other accounts are kept)
 
 Where the pull request is already open, it commits to that branch instead. It skips READMEs that already have every change. It is a dry run unless you pass `--apply`:
 
