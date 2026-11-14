@@ -1,0 +1,13 @@
+{
+    "_comment": "Health check highlight colours, by report style. A repo uses the default (AsBuiltReport.Core) style unless it is listed with its own. Each colour must match the BackgroundColor of that Style -Name in the style file, so a README swatch shows the colour the report really uses.",
+    "styles": {
+        "default": {
+            "source": "AsBuiltReport.Core default style (AsBuiltReport.Core.Style.ps1)",
+            "colours": { "Critical": "FEDDD7", "Warning": "FFF4C7", "Info": "E3F5FC", "OK": "DFF0D0" }
+        },
+        "AsBuiltReport.Nutanix.PrismElement": {
+            "source": "AsBuiltReport.Nutanix.PrismElement.Style.ps1",
+            "colours": { "Critical": "F55656", "Warning": "FFBC0B", "Info": "22A5F7", "OK": "36D068" }
+        }
+    }
+}
