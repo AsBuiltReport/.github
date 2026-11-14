@@ -10,12 +10,6 @@
 
 [AsBuiltReport](https://www.asbuiltreport.com) is an open source PowerShell framework that documents your infrastructure for you, for any platform with a PowerShell module or REST API. Choose your vendors, level of detail, health checks, styling and language, then get the report in Word, HTML or text, by email if you like.
 
-```powershell
-Install-Module AsBuiltReport.Core
-Install-Module AsBuiltReport.Microsoft.Azure
-New-AsBuiltReport -Report Microsoft.Azure -Target $TenantId -UseInteractiveAuth -Format Word
-```
-
 >[!NOTE]
 >Due to time constraints and limited access to development environments and resources for [current contributors](https://www.asbuiltreport.com/about/contributors/), development and support for AsBuiltReport has slowed, with some report modules now falling behind on support for current vendor technology versions.
 >
