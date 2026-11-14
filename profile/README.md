@@ -5,13 +5,40 @@
 </p>
 
 <p align="center">
-    <a href='https://ko-fi.com/B0B7DDGZ7' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://ko-fi.com/img/githubbutton_sm.svg' border='0' alt='Want to keep alive this project? Support me on Ko-fi' /></a>
+    <a href='https://ko-fi.com/B0B7DDGZ7' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://ko-fi.com/img/githubbutton_sm.svg' border='0' alt='Support AsBuiltReport on Ko-fi' /></a>
 </p>
 
-[AsBuiltReport](https://www.asbuiltreport.com) is an open source configuration document framework which utilises Microsoft PowerShell to produce as-built documentation in multiple document formats for multiple vendors and technologies. The framework allows users to easily generate clear and consistent documentation, for any environment which supports Microsoft PowerShell and/or a RESTful API.
+[AsBuiltReport](https://www.asbuiltreport.com) is an open source PowerShell framework that documents your infrastructure for you, for any platform with a PowerShell module or REST API. Choose your vendors, level of detail, health checks, styling and language, then get the report in Word, HTML or text, by email if you like.
 
-> [!NOTE]
-> AsBuiltReport is maintained by a small group of [volunteers](https://www.asbuiltreport.com/about/contributors/), and some report modules are behind the latest vendor releases. Contributions of any kind are welcome, from code to bug reports and documentation. Read the [contributing guide](https://www.asbuiltreport.com/dev-guide/contributing/) to get started, or use the [discussion board](https://github.com/orgs/AsBuiltReport/discussions) to ask questions and share ideas.
+```powershell
+Install-Module AsBuiltReport.Core
+Install-Module AsBuiltReport.Microsoft.Azure
+New-AsBuiltReport -Report Microsoft.Azure -Target $TenantId -UseInteractiveAuth -Format Word
+```
+
+>[!NOTE]
+>Due to time constraints and limited access to development environments and resources for [current contributors](https://www.asbuiltreport.com/about/contributors/), development and support for AsBuiltReport has slowed, with some report modules now falling behind on support for current vendor technology versions.
+>
+>However, this is an open source project, and we encourage users to [contribute](https://www.asbuiltreport.com/dev-guide/contributing/) to help keep it going.
+>
+>Your contributions, whether through code, bug reports, or documentation, are crucial to its success!
+>
+>Use the [discussion board](https://github.com/orgs/AsBuiltReport/discussions) to share ideas, ask for help, or collaborate with others. Together, we can keep improving AsBuiltReport for everyone!
+
+## Get Started
+
+<table width="100%">
+    <tr>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/new-to-asbuiltreport.png" alt="New to AsBuiltReport?" width="100%"><br>
+            Follow the <a href="https://www.asbuiltreport.com/user-guide/quickstart/">Quickstart Guide</a> to generate your first report in minutes.
+        </td>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/looking-for-a-specific-module.png" alt="Looking for a specific module?" width="100%"><br>
+            Browse all available <a href="https://www.asbuiltreport.com/user-guide/report-modules/overview/#activity-status">Report Modules</a> by vendor and technology.
+        </td>
+    </tr>
+</table>
 
 ## Features
 
@@ -139,17 +166,4 @@ Select a module to open its repository and documentation.
     <a href="https://github.com/AsBuiltReport/AsBuiltReport.Veeam.VBR"><img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/tiles/AsBuiltReport.Veeam.VBR.png" alt="AsBuiltReport.Veeam.VBR" width="270"></a>
 </p>
 
-## Get Started
-
-<table width="100%">
-    <tr>
-        <td width="50%" valign="top">
-            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/new-to-asbuiltreport.png" alt="New to AsBuiltReport?" width="100%"><br>
-            Follow the <a href="https://www.asbuiltreport.com/user-guide/quickstart/">Quickstart Guide</a> to generate your first report in minutes.
-        </td>
-        <td width="50%" valign="top">
-            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/looking-for-a-specific-module.png" alt="Looking for a specific module?" width="100%"><br>
-            Browse all available <a href="https://www.asbuiltreport.com/user-guide/report-modules/overview/#activity-status">Report Modules</a> by vendor and technology.
-        </td>
-    </tr>
-</table>
+Not every module supports the latest vendor release. Check the [activity status](https://www.asbuiltreport.com/user-guide/report-modules/overview/#activity-status) table before you start.
