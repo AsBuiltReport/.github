@@ -147,6 +147,15 @@ Select a module to open its repository and documentation.
 
 ## Get Started
 
-| :rocket: **New to AsBuiltReport?** | :electric_plug: **Looking for a specific module?** |
-| :-----------------------| :-----------------------|
-| Follow the [Quickstart Guide](https://www.asbuiltreport.com/user-guide/quickstart/) to generate your first report in minutes. | Browse all available [Report Modules](https://www.asbuiltreport.com/user-guide/report-modules/overview/#activity-status) by vendor and technology. |
+<table width="100%">
+    <tr>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/new-to-asbuiltreport.png" alt="New to AsBuiltReport?" width="100%"><br>
+            Follow the <a href="https://www.asbuiltreport.com/user-guide/quickstart/">Quickstart Guide</a> to generate your first report in minutes.
+        </td>
+        <td width="50%" valign="top">
+            <img src="https://raw.githubusercontent.com/AsBuiltReport/.github/main/profile/images/banners/looking-for-a-specific-module.png" alt="Looking for a specific module?" width="100%"><br>
+            Browse all available <a href="https://www.asbuiltreport.com/user-guide/report-modules/overview/#activity-status">Report Modules</a> by vendor and technology.
+        </td>
+    </tr>
+</table>
