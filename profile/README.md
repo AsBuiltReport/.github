@@ -4,12 +4,6 @@
     </a>
 </p>
 
-<h1 style="font-size:5vw" align="center">
-    AsBuiltReport
-    <br><br>Document Your Datacenter
-    <br>With PowerShell
-</h1>
-
 <p align="center">
     <a href='https://ko-fi.com/B0B7DDGZ7' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://ko-fi.com/img/githubbutton_sm.svg' border='0' alt='Want to keep alive this project? Support me on Ko-fi' /></a>
 </p>
